@@ -35,13 +35,16 @@ class BackgroundUserMatching
           delete_user_ids.push(u_id)
         end
       end
+      new_match = false
       result_user_ids.each do  |key, value| 
          if UserFriend.where(:user_id => user_id, :friend_id => key).count > 0
-            UserFriend.where(:user_id => user_id, :friend_id => key).first.update_attributes(:percentage => value, :is_new_match => true)
+            UserFriend.where(:user_id => user_id, :friend_id => key).first.update_attributes(:percentage => value)
          else
+            new_match = true
             UserFriend.create(:user_id => user_id, :friend_id => key, :percentage => value, :is_new_match => true)
          end
       end
+      UserFriend.where(:user_id => user_id).update_all(:is_new_match => true) if new_match
       UserFriend.where(:user_id => user_id, :friend_id => delete_user_ids).delete_all
       # BackgroundImageProcessor.perform_async(user_id)
 
