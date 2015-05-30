@@ -8,39 +8,39 @@ UserFriend.destroy_all
 puts "Tables Deleted"
 
 #Create Users
-U1 = User.create(:phone => '1111111111', :password => '123456', :name => 'Tyrion', :session_token => 'abcdefgh1', :twitter_handle => 'https://twitter.com/Tyrion')
+U1 = User.create(:phone => '1111111111', :password => '123456', :name => 'Tyrion', :session_token => 'abcdefgh1', :twitter_handle => '@Tyrion')
 U1.photo = File.new("#{Rails.root}/images/GOT/Tyrion.jpg")
 U1.save
 
-U2 = User.create(:phone => '2222222222', :password => '123456', :name => 'Jon', :session_token => 'abcdefgh2', :twitter_handle => 'https://twitter.com/Jon')
+U2 = User.create(:phone => '2222222222', :password => '123456', :name => 'Jon', :session_token => 'abcdefgh2', :twitter_handle => '@JonSnow')
 U2.photo = File.new("#{Rails.root}/images/GOT/snow.jpg")
 U2.save
 
-U3 = User.create(:phone => '3333333333', :password => '123456', :name => 'Sansa', :session_token => 'abcdefgh3', :twitter_handle => 'https://twitter.com/Sansa')
+U3 = User.create(:phone => '3333333333', :password => '123456', :name => 'Sansa', :session_token => 'abcdefgh3', :twitter_handle => '@SansaStark')
 U3.photo = File.new("#{Rails.root}/images/GOT/sansa.jpg")
 U3.save
 
-U4 = User.create(:phone => '4444444444', :password => '123456', :name => 'Bran', :session_token => 'abcdefgh4', :twitter_handle => 'https://twitter.com/Bran')
+U4 = User.create(:phone => '4444444444', :password => '123456', :name => 'Bran', :session_token => 'abcdefgh4', :twitter_handle => '@BranStark')
 U4.photo = File.new("#{Rails.root}/images/GOT/bran.jpg")
 U4.save
 
-U5 = User.create(:phone => '5555555555', :password => '123456', :name => 'Arya', :session_token => 'abcdefgh5', :twitter_handle => 'https://twitter.com/Arya')
+U5 = User.create(:phone => '5555555555', :password => '123456', :name => 'Arya', :session_token => 'abcdefgh5', :twitter_handle => '@AryaStark')
 U5.photo = File.new("#{Rails.root}/images/GOT/arya.png")
 U5.save
 
-U6 = User.create(:phone => '6666666666', :password => '123456', :name => 'Cersei', :session_token => 'abcdefgh6', :twitter_handle => 'https://twitter.com/Cersei')
+U6 = User.create(:phone => '6666666666', :password => '123456', :name => 'Cersei', :session_token => 'abcdefgh6', :twitter_handle => '@Cersei')
 U6.photo = File.new("#{Rails.root}/images/GOT/cersei.jpg")
 U6.save
 
-U7 = User.create(:phone => '7777777777', :password => '123456', :name => 'Daenerys', :session_token => 'abcdefgh7', :twitter_handle => 'https://twitter.com/Daenerys')
+U7 = User.create(:phone => '7777777777', :password => '123456', :name => 'Daenerys', :session_token => 'abcdefgh7', :twitter_handle => '@Daenerys')
 U7.photo = File.new("#{Rails.root}/images/GOT/daenerys.jpg")
 U7.save
 
-U8 = User.create(:phone => '8888888888', :password => '123456', :name => 'Hodor', :session_token => 'abcdefgh8', :twitter_handle => 'https://twitter.com/Hodor')
+U8 = User.create(:phone => '8888888888', :password => '123456', :name => 'Hodor', :session_token => 'abcdefgh8', :twitter_handle => '@Hodor')
 U8.photo = File.new("#{Rails.root}/images/GOT/hodor.jpg")
 U8.save
 
-U9 = User.create(:phone => '9999999999', :password => '123456', :name => 'Jaime', :session_token => 'abcdefgh9', :twitter_handle => 'https://twitter.com/Jaime')
+U9 = User.create(:phone => '9999999999', :password => '123456', :name => 'Jaime', :session_token => 'abcdefgh9', :twitter_handle => '@Jaime')
 U9.photo = File.new("#{Rails.root}/images/GOT/jaime.jpg")
 U9.save
 

@@ -29,7 +29,7 @@ class BackgroundUserMatching
       # matrix[0, model.document_index(document2)]
       for col in 1...matrix.column_size()
         u_id = doc_hash[(col+1).to_s]
-        if matrix[0, col] > 0.3
+        if matrix[0, col] > 0.9
           result_user_ids[u_id.to_s] = (matrix[0, col]*100).to_i
         else
           delete_user_ids.push(u_id)
