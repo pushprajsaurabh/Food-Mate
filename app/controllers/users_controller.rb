@@ -15,7 +15,9 @@ class UsersController < SessionsController
   end
 
   def user_matches
-    friends = User.find(@user_id).friends.select(:id, :name, :twitter_handle, :phone)
+    friends = User.find(@user_id).friends.map do |x|
+      x.to_user_hash
+    end
     api_response(friends, 'Friends', 200)
   end
 
@@ -30,7 +32,7 @@ class UsersController < SessionsController
 
 
   def user_params
-    params.permit(:phone, :password, :password_confirmation, :name)
+    params.permit(:phone, :password, :password_confirmation, :name, :photo, :twitter_handle)
   end
 
 end
