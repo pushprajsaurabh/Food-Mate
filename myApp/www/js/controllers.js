@@ -1,14 +1,15 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope, $state) {
+    if(window.localStorage.session_token){
+    } else {
+        $state.go('login', {}, {reload: true});
+        window.location.reload(true);
+    }
+})
 
-.controller('ChatsCtrl', function($scope,$http, Chats) {
-  // $scope.chats = Chats.all();
-  // $scope.remove = function(chat) {
-  //   debugger
-  //   Chats.remove(chat);
-  // }
-
+.controller('ChatsCtrl', function($scope,$http, Chats, $state, $ionicHistory) {
+    if(window.localStorage.session_token){
     $http.get('http://localhost:3000/user_matches/?session_token=' + window.localStorage.session_token).then(function(resp)
     {
         $scope.chats = resp.data.payload ;
@@ -16,13 +17,23 @@ angular.module('starter.controllers', [])
             console.error('ERR', err);
             // err.status will contain the status code
           })
+    } else{
+        $state.go('login', {}, {reload: true});
+        window.location.reload(true);
+    }
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('ChatDetailCtrl', function($scope, $stateParams, Chats, $state) {
+    if(window.localStorage.session_token){
+        $scope.chat = Chats.get($stateParams.chatId);
+    } else {
+       $state.go('login', {}, {reload: true});
+        window.location.reload(true);
+    }
 })
 
 .controller('AccountCtrl', function($scope, $http, $state) {
+    if(window.localStorage.session_token){
   $scope.log_out = function() {
         $http.get('http://localhost:3000/log_out/?session_token=' + window.localStorage.session_token).then(function(resp) {
             window.localStorage.clear();
@@ -32,6 +43,10 @@ angular.module('starter.controllers', [])
             // err.status will contain the status code
         })
     }
+} else{
+    $state.go('login', {}, {reload: true});
+    window.location.reload(true);
+}
 })
 
 .controller('CardsCtrl', function($scope, $http, $state, $ionicPopup) {
@@ -85,7 +100,8 @@ angular.module('starter.controllers', [])
             // err.status will contain the status code
           })
     } else {
-        $state.go('login');
+        $state.go('login', {}, {reload: true});
+        window.location.reload(true);
     }
 })
 .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state, $http) {
