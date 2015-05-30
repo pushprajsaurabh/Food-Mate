@@ -23,10 +23,10 @@ class ItemsService
     choice = UserChoice.find_or_create_by(:user_id => user_id)
     chosen_item_ids = choice.item_ids + ',' rescue ''
     item_ids_unsorted = chosen_item_ids.to_s + params[:item_id].to_s
-    choice.item_ids = item_ids_unsorted.split(",").sort.map { |str| "#{str}" }.join(',')
+    choice.item_ids = item_ids_unsorted.split(",").uniq.sort.map { |str| "#{str}" }.join(',')
     chosen_tags = choice.tags + ',' rescue ''
     tags_unsorted = chosen_tags.to_s + item.tags.pluck(:name).map {|str| "#{str}"}.join(',')
-    choice.tags = tags_unsorted.split(",").sort.map { |str| "#{str}" }.join(',')
+    choice.tags = tags_unsorted.split(",").uniq.sort.map { |str| "#{str}" }.join(',')
     choice.save
     BackgroundUserMatching.perform_async(@user_id)
     has_new_match = User.find(user_id).detect_and_update_match

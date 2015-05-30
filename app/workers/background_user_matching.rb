@@ -6,7 +6,7 @@ class BackgroundUserMatching
   
   def perform(user_id)
     user_choices = UserChoice.find_by_user_id(user_id)
-    if user_choices && user_choices.tags && user_choices.tags.split(',').size >= 10
+    if user_choices && user_choices.tags && user_choices.tags.split(',').size >= 5
       docs = []
       doc_hash = {}
       counter = 1
@@ -14,7 +14,7 @@ class BackgroundUserMatching
       docs.push(TfIdfSimilarity::Document.new(user_choices.tags))
       counter += 1
       rest_choices = UserChoice.where.not(user_id: user_id).each do |x|
-        if x.tags.split(',').size >= 10
+        if x.tags.split(',').size >= 5
           doc_hash[counter.to_s] = x.user_id
           docs.push(TfIdfSimilarity::Document.new(x.tags))
           counter += 1
