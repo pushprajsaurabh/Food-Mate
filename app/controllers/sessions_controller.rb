@@ -15,15 +15,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-debugger
     user = User.find_by_phone(params[:phone])
     if user && user.authenticate(params[:password])
       session_token = user.id.to_s + SecureRandom.base64(64).gsub(/[$=+\/]/,65.+(rand(25)).chr)
       user.session_token = session_token
       session[:session_token] = session_token
       user.save
-      has_new_match = user.detect_match
-      api_response({ :session_token => session_token, :has_new_match => has_new_match } , 'Logged in!!!', 200)
+      api_response({ :session_token => session_token } , 'Logged in!!!', 200)
     else
       api_response(nil, "Invalid phone or password", 400)
     end
@@ -31,7 +29,7 @@ debugger
 
   def destroy
     session[:session_token] = nil
-    user.update_attributes(:session_token => nil)
+    User.find(@user_id).update_attributes(:session_token => nil)
     api_response(nil, 'Logged out!!!', 200)
   end
 

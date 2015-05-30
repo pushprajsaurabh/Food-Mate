@@ -14,9 +14,10 @@ class User < ActiveRecord::Base
               # association_foreign_key: :friend_user_id
   # attr_accessible :email, :password, :password_confirmation
 
-  def detect_match
+  def detect_and_update_match
     friends = self.user_friends
     has_new_match = friends.blank? ? false : friends.first.is_new_match 
+    friends.update_all(:is_new_match => false) if friends.present? && has_new_match
     return has_new_match
   end
 end

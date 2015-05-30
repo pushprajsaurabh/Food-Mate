@@ -29,7 +29,8 @@ class ItemsService
     choice.tags = tags_unsorted.split(",").sort.map { |str| "#{str}" }.join(',')
     choice.save
     BackgroundUserMatching.perform_async(@user_id)
-    has_new_match = User.find(user_id).detect_match
+    has_new_match = User.find(user_id).detect_and_update_match
+    
     return has_new_match
   end
 

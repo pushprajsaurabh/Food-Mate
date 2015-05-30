@@ -2,7 +2,8 @@ class ItemsController < SessionsController
   def get_items
     items_object = ItemsService.new
     items = items_object.generate_random_items
-    render :json => {:payload => items, :meta => { :count => items ? items.count : 0 }}, :status => 200
+    has_new_match = User.find(@user_id).detect_and_update_match
+    render :json => {:payload => items, :has_new_match => has_new_match, :meta => { :count => items ? items.count : 0 }}, :status => 200
   end
 
   def like_item
