@@ -44,7 +44,7 @@ class BackgroundUserMatching
             UserFriend.create(:user_id => user_id, :friend_id => key, :percentage => value)
          end
       end
-      UserFriend.where(:user_id => user_id, :friend_id => delete_user_ids).delete_all
+      # UserFriend.where(:user_id => user_id, :friend_id => delete_user_ids).delete_all
       UserFriend.where(:user_id => user_id).update_all(:is_new_match => true) if new_match
       # BackgroundImageProcessor.perform_async(user_id)
 
