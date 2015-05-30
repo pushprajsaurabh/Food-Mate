@@ -41,11 +41,11 @@ class BackgroundUserMatching
             UserFriend.where(:user_id => user_id, :friend_id => key).first.update_attributes(:percentage => value)
          else
             new_match = true
-            UserFriend.create(:user_id => user_id, :friend_id => key, :percentage => value, :is_new_match => true)
+            UserFriend.create(:user_id => user_id, :friend_id => key, :percentage => value)
          end
       end
-      UserFriend.where(:user_id => user_id).update_all(:is_new_match => true) if new_match
       UserFriend.where(:user_id => user_id, :friend_id => delete_user_ids).delete_all
+      UserFriend.where(:user_id => user_id).update_all(:is_new_match => true) if new_match
       # BackgroundImageProcessor.perform_async(user_id)
 
       # document_1 = TfIdfSimilarity::Document.new("Lorem ipsum dolor sit amet...")
